@@ -6,10 +6,21 @@ function App() {
   
 const task = useTaskStore((state)=>state);
 
-const [arrayTask, setArrayTask] = useState(["task1", "task2"]);
 
-const addTask = ()=>{
-    setArrayTask([...arrayTask, "new array"]);
+const [arrayTask, setArrayTask] = useState([{id:125, title:"primera tarea", taskStatus:true}]);
+
+const addTask = (value:number)=>{
+    setArrayTask([...arrayTask, {id:value, title:"nueva tarea"}]);
+}
+
+const deleteTask = (value:number)=>{
+    const nuevoArray = arrayTask.filter((arrayTask) => arrayTask.id !== value);
+    setArrayTask(nuevoArray);
+}
+
+const toggleTask = (value) => {
+  
+
 }
 
 console.log(arrayTask);
@@ -22,14 +33,13 @@ console.log(arrayTask);
       <div>
         <ul>
           {arrayTask.map(arrayTask =>(
-            <li key={arrayTask}>
-              <p><input type='checkbox'/>{arrayTask}<button>Eliminar</button></p>
+            <li key={arrayTask.id} >
+              <p><input onChange={()=>{toggleTask(arrayTask.id)}} type='checkbox'/ >{arrayTask.title}<button onClick={()=>deleteTask(arrayTask.id)}>Eliminar</button></p>
             </li>
           ))}
-         
         </ul>
         <div>
-          <button onClick={addTask}>agregar nueva tarea</button>
+          <button onClick={()=>addTask(arrayTask.length)}>agregar nueva tarea</button>
         </div>
       </div>
     </div>
