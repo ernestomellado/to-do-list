@@ -24,16 +24,16 @@ const toggleTask = (value:number) => {
 
   const pickTask = arrayTask.filter((array) => array.id === value);
  
-  if(pickTask.length > 1){
+  if(pickTask){
     let resultToogleTask = arrayTask.map((task) =>{
-      task.id === value ? {...task, taskStatus: !task.taskStatus}: task
+       let save = task.id === value ? { ...task, taskStatus: !task.taskStatus} : task
+       return save
     })  
-    console.log("resultToogleTask", resultToogleTask)
+    setArrayTask(resultToogleTask);
   }
-  console.log(pickTask);
+  console.log("pickTask", pickTask);
 }
 
-console.log(arrayTask);
   return (
     <>
     <div>
