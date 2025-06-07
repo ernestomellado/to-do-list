@@ -5,6 +5,8 @@ import { useState } from 'react';
 function App() {
   
 const task = useTaskStore((state)=>state);
+const addTaskZustand = useTaskStore((state) => state.addTask)
+
 
 
 const [arrayTask, setArrayTask] = useState([{id:125, title:"primera tarea", taskStatus:false}]);
@@ -19,8 +21,10 @@ const deleteTask = (value:number)=>{
 }
 
 const toggleTask = (value:number) => {
-  console.log("imprimir value con el click", value)
+  addTaskZustand(28);
+  console.log("imprimir el nuevo valor de task", task)
  
+
 
   const pickTask = arrayTask.filter((array) => array.id === value);
  
