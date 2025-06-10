@@ -1,27 +1,37 @@
 import { create } from 'zustand'
 
 interface Task {
-  deleteTask: any
-  addTask: any
+  addTask: any,
+  deleteTask:any,
+  toggleTask:any
   arrayTask : [{
     id:number, 
     title: string
     taskStatus: boolean
   }]
 }
-
-export const useTaskStore = create<Task>((set) => ({
-  arrayTask: [{id:125, title:"primera tarea", taskStatus:false}],
-  deleteTask: (value:numer) =>  {
-      const newArray= arrayTask.filter((arrayTask) => arrayTask.id !== value);
-      set((state)=>({
-        arrayTask:[newArray]
-      })
-  }
-  addTask:(value:number) => set((state) => ({ 
-    arrayTask: [...state.arrayTask, {id:value, title:"nuevo array", taskStatus:false}]
-  }))
+export const useTaskStore = create<TaskStore>((set) => ({
+  arrayTask: [{ id: 125, title: "primera tarea", taskStatus: false }],
   
-  
+  deleteTask: (value) =>
+    set((state) => ({
+      arrayTask: state.arrayTask.filter((task) => task.id !== value)
+    })),
 
+    toggleTask: (value) =>
+    set((state) => ({
+      arrayTask: state.arrayTask.filter((task) => task.id !== value)
+    })),
+
+  addTask: (value) =>
+    set((state) => ({
+      arrayTask: [
+        ...state.arrayTask,
+        {
+          id: value,
+          title: "nuevo_array",
+          taskStatus: false,
+        }
+      ]
+    }))
 }))

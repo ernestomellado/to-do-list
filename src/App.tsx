@@ -6,6 +6,7 @@ function App() {
   
 const arrayTaskZustand = useTaskStore((state)=>state.arrayTask);
 const addTaskZustand = useTaskStore((state) => state.addTask);
+const deleteTaskZustand = useTaskStore((state) => state.deleteTask);
 
 
 
@@ -39,7 +40,7 @@ const toggleTask = (value:number) => {
         <ul>
           {arrayTaskZustand.map(arrayTask =>(
             <li key={arrayTask.id} >
-              <p><input onChange={()=>{toggleTask(arrayTask.id)}} type='checkbox'/ ><span className={arrayTask.taskStatus ? 'line-through text-gray-400' : ''}>{arrayTask.title}</span><button onClick={()=>deleteTask(arrayTask.id)}>Eliminar</button></p>
+              <p><input onChange={()=>{toggleTask(arrayTask.id)}} type='checkbox'/ ><span className={arrayTask.taskStatus ? 'line-through text-gray-400' : ''}>{arrayTask.title}</span><button onClick={()=>deleteTaskZustand(arrayTask.id)}>Eliminar</button></p>
             </li>
           ))}
         </ul>
