@@ -18,10 +18,13 @@ export const useTaskStore = create<TaskStore>((set) => ({
       arrayTask: state.arrayTask.filter((task) => task.id !== value)
     })),
 
-    toggleTask: (value) =>
-    set((state) => ({
-      arrayTask: state.arrayTask.filter((task) => task.id !== value)
-    })),
+    toggleTask: (value) =>{
+      set((state) => ({
+      arrayTask:  state.arrayTask.filter((array) => array.id === value) ?  [] : []
+    }))
+
+    }
+    ,
 
   addTask: (value) =>
     set((state) => ({

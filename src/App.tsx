@@ -1,3 +1,4 @@
+import type { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal } from 'react';
 import './App.css'
 import {useTaskStore} from "./store/useTaskStore"
 
@@ -7,6 +8,7 @@ function App() {
 const arrayTaskZustand = useTaskStore((state)=>state.arrayTask);
 const addTaskZustand = useTaskStore((state) => state.addTask);
 const deleteTaskZustand = useTaskStore((state) => state.deleteTask);
+const toggleTaskZustand = useTaskStore((state) => state.toggleTask);
 
 
 
@@ -38,9 +40,9 @@ const toggleTask = (value:number) => {
       </div>
       <div>
         <ul>
-          {arrayTaskZustand.map(arrayTask =>(
+          {arrayTaskZustand.map((arrayTask: { id: Key | null | undefined; taskStatus: any; title: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | null | undefined; }) =>(
             <li key={arrayTask.id} >
-              <p><input onChange={()=>{toggleTask(arrayTask.id)}} type='checkbox'/ ><span className={arrayTask.taskStatus ? 'line-through text-gray-400' : ''}>{arrayTask.title}</span><button onClick={()=>deleteTaskZustand(arrayTask.id)}>Eliminar</button></p>
+              <p><input onChange={()=>{toggleTaskZustand(arrayTask.id)}} type='checkbox'/ ><span className={arrayTask.taskStatus ? 'line-through text-gray-400' : ''}>{arrayTask.title}</span><button onClick={()=>deleteTaskZustand(arrayTask.id)}>Eliminar</button></p>
             </li>
           ))}
         </ul>
